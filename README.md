@@ -22,5 +22,3 @@ Wymagany .NET 8 SDK. W katalogu głównym repozytorium:
 ```bash
 cd RentalApp
 dotnet run
-
-
