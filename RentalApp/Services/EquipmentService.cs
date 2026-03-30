@@ -2,7 +2,7 @@
 using RentalApp.Models;
 
 namespace RentalApp.Services;
-
+public int CountAvailable() => _context.Equipments.Count(e => e.IsAvailable);
 public class EquipmentService : IEquipmentService
 {
     private readonly RentalDbContext _context;
