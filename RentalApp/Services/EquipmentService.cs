@@ -1,8 +1,9 @@
-﻿using RentalApp.Data;
+using RentalApp.Data;
 using RentalApp.Models;
+using System.Linq;
 
 namespace RentalApp.Services;
-public int CountAvailable() => _context.Equipments.Count(e => e.IsAvailable);
+
 public class EquipmentService : IEquipmentService
 {
     private readonly RentalDbContext _context;
@@ -33,4 +34,6 @@ public class EquipmentService : IEquipmentService
         eq.Status = "unavailable";
         return true;
     }
+
+    public int CountAvailable() => _context.Equipments.Count(e => e.IsAvailable);
 }
