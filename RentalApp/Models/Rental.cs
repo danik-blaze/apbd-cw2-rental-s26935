@@ -1,4 +1,4 @@
-﻿namespace RentalApp.Models;
+namespace RentalApp.Models;
 
 public class Rental
 {

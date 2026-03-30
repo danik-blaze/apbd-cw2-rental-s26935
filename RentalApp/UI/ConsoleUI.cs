@@ -1,4 +1,4 @@
-﻿using RentalApp.Data;
+using RentalApp.Data;
 using RentalApp.Models;
 using RentalApp.Services;
 
@@ -109,27 +109,27 @@ public class ConsoleUI
     private void AddUser()
     {
         Console.Write("Imię: ");
-        var firstName = Console.ReadLine();
+        var firstName = Console.ReadLine() ?? "";
         Console.Write("Nazwisko: ");
-        var lastName = Console.ReadLine();
+        var lastName = Console.ReadLine() ?? "";
         Console.Write("Email: ");
-        var email = Console.ReadLine();
+        var email = Console.ReadLine() ?? "";
         Console.Write("Typ (student/pracownik): ");
-        var type = Console.ReadLine()?.ToLower();
+        var type = Console.ReadLine()?.ToLower() ?? "";
 
         User user;
         if (type == "student")
         {
             Console.Write("Nr indeksu: ");
-            var studentId = Console.ReadLine();
+            var studentId = Console.ReadLine() ?? "";
             user = new Student(firstName, lastName, email, studentId);
         }
         else
         {
             Console.Write("Nr pracownika: ");
-            var empId = Console.ReadLine();
+            var empId = Console.ReadLine() ?? "";
             Console.Write("Departament: ");
-            var dept = Console.ReadLine();
+            var dept = Console.ReadLine() ?? "";
             user = new Employee(firstName, lastName, email, empId, dept);
         }
 
@@ -140,27 +140,35 @@ public class ConsoleUI
     private void AddEquipment()
     {
         Console.Write("Typ (laptop/projektor/kamera): ");
-        var type = Console.ReadLine()?.ToLower();
+        var type = Console.ReadLine()?.ToLower() ?? "";
         Console.Write("Nazwa: ");
-        var name = Console.ReadLine();
+        var name = Console.ReadLine() ?? "";
 
         switch (type)
         {
             case "laptop":
                 Console.Write("Procesor: ");
-                var cpu = Console.ReadLine();
+                var cpu = Console.ReadLine() ?? "";
                 Console.Write("RAM (GB): ");
-                var ram = int.Parse(Console.ReadLine());
+                if (!int.TryParse(Console.ReadLine(), out int ram))
+                {
+                    Console.WriteLine("Niepoprawna liczba.");
+                    return;
+                }
                 Console.Write("System operacyjny: ");
-                var os = Console.ReadLine();
+                var os = Console.ReadLine() ?? "";
                 var laptop = new Laptop(name, cpu, ram, os);
                 _equipmentService.AddEquipment(laptop);
                 break;
             case "projektor":
                 Console.Write("Lumeny: ");
-                var lumens = int.Parse(Console.ReadLine());
+                if (!int.TryParse(Console.ReadLine(), out int lumens))
+                {
+                    Console.WriteLine("Niepoprawna liczba.");
+                    return;
+                }
                 Console.Write("Rozdzielczość: ");
-                var res = Console.ReadLine();
+                var res = Console.ReadLine() ?? "";
                 Console.Write("Bezprzewodowy (t/n): ");
                 var wireless = Console.ReadLine()?.ToLower() == "t";
                 var projector = new Projector(name, lumens, res, wireless);
@@ -168,9 +176,13 @@ public class ConsoleUI
                 break;
             case "kamera":
                 Console.Write("Megapiksele: ");
-                var mp = int.Parse(Console.ReadLine());
+                if (!int.TryParse(Console.ReadLine(), out int mp))
+                {
+                    Console.WriteLine("Niepoprawna liczba.");
+                    return;
+                }
                 Console.Write("Typ obiektywu: ");
-                var lens = Console.ReadLine();
+                var lens = Console.ReadLine() ?? "";
                 Console.Write("Wideo (t/n): ");
                 var video = Console.ReadLine()?.ToLower() == "t";
                 var camera = new Camera(name, mp, lens, video);
