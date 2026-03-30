@@ -1,4 +1,6 @@
-﻿using RentalApp.Data;
+﻿// RentalService contains all rental business logic
+using RentalApp.Data;
+
 using RentalApp.Models;
 
 namespace RentalApp.Services;
